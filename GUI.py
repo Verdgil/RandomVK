@@ -172,7 +172,7 @@ class Player(QWidget):
 
     def th(self):
         time.sleep(int(self.audio['duration']))
-        #self.Next_Button.click() #TODO: FIX THIS SHIT
+        #self.Next_Button.click() #TODO: FUCK, FIX THIS SHIT
 
 
 
