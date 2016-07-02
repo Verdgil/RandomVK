@@ -10,6 +10,8 @@ import tempfile
 import threading
 import time
 
+# TODO: Жанры, кнопка назад, ИИ, андроид версия
+
 class Login(QWidget):
     login = ''
     passwd = ''
