@@ -10,7 +10,7 @@ import tempfile
 import threading
 import time
 
-# TODO: Жанры, кнопка назад, ИИ, андроид версия
+# TODO: Жанры, кнопка назад, ИИ, андроид версия, минимизировать окно, переделать кнопки, сделать обложку на бекграунле
 
 class Login(QWidget):
     login = ''
