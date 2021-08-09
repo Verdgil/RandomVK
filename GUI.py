@@ -111,45 +111,46 @@ class Player(QWidget):
             temp += '/RandomVK'
         if not os.path.exists(temp):
             os.mkdir(temp)
-        resp = backend.requests.get(self.audio['url'])
-        if 'image' in self.audio:
-            img = backend.requests.get(self.audio['image'])
-        else:
-            self.Song_Image.load('blank.png')
-        if os.name == 'nt':
-            tempfile_rand = open(temp + '\\temp.mp3', 'wb')
-            tempfile_rand.write(resp.content)
-            tempfile_rand.close()
-            self.media = self.instance.media_new(temp + '\\temp.mp3')
+        if self.audio['url']:
+            resp = backend.requests.get(self.audio['url'])
             if 'image' in self.audio:
-                tmp_image = open(temp + '\\temp.png', 'wb')
-                tmp_image.write(img.content)
-                tmp_image.close()
-                self.Song_Image.load(temp + '\\temp.png')
-        else:
-            tempfile_rand = open(temp + '/temp.mp3', 'wb')
-            tempfile_rand.write(resp.content)
-            tempfile_rand.close()
-            self.media = self.instance.media_new(temp + '/temp.mp3')
-            if 'image' in self.audio:
-                tmp_image = open(temp + '/temp.png', 'wb')
-                tmp_image.write(img.content)
-                tmp_image.close()
-                self.Song_Image.load(temp + '/temp.png')
-        try:
-            self.mediaplayer.stop()
-        except:
-            pass
-        self.Song_Image_Label.setPixmap(self.Song_Image)
-        self.mediaplayer.set_media(self.media)
-        self.mediaplayer.play()
-        self.time_last = time.time()
-        self.PP_Button.setText('Pause')
-        self.Author_Label.setText(self.audio['artist'])
-        self.Name_Label.setText(self.audio['title'])
-        self.thread = threading.Thread(target=self.th)
-        self.thread.daemon = True
-        self.thread.start()
+                img = backend.requests.get(self.audio['image'])
+            else:
+                self.Song_Image.load('blank.png')
+            if os.name == 'nt':
+                tempfile_rand = open(temp + '\\temp.mp3', 'wb')
+                tempfile_rand.write(resp.content)
+                tempfile_rand.close()
+                self.media = self.instance.media_new(temp + '\\temp.mp3')
+                if 'image' in self.audio:
+                    tmp_image = open(temp + '\\temp.png', 'wb')
+                    tmp_image.write(img.content)
+                    tmp_image.close()
+                    self.Song_Image.load(temp + '\\temp.png')
+            else:
+                tempfile_rand = open(temp + '/temp.mp3', 'wb')
+                tempfile_rand.write(resp.content)
+                tempfile_rand.close()
+                self.media = self.instance.media_new(temp + '/temp.mp3')
+                if 'image' in self.audio:
+                    tmp_image = open(temp + '/temp.png', 'wb')
+                    tmp_image.write(img.content)
+                    tmp_image.close()
+                    self.Song_Image.load(temp + '/temp.png')
+            try:
+                self.mediaplayer.stop()
+            except:
+                pass
+            self.Song_Image_Label.setPixmap(self.Song_Image)
+            self.mediaplayer.set_media(self.media)
+            self.mediaplayer.play()
+            self.time_last = time.time()
+            self.PP_Button.setText('Pause')
+            self.Author_Label.setText(self.audio['artist'])
+            self.Name_Label.setText(self.audio['title'])
+            self.thread = threading.Thread(target=self.th)
+            self.thread.daemon = True
+            self.thread.start()
     def Click_Add(self):
         global vk
         vk.add(self.audio['id'], self.audio['aid'])
@@ -171,7 +172,8 @@ class Player(QWidget):
             self.thread.start()
 
     def th(self):
-        time.sleep(int(self.audio['duration']))
+        ...
+        # time.sleep(int(self.audio['duration']))
         #self.Next_Button.click() #TODO: FUCK, FIX THIS SHIT
 
 
